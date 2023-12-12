@@ -1,0 +1,34 @@
+{
+  "airports": [
+    {
+      "code": "LHR",
+      "name": "London Heathrow Airport",
+      "city": "London",
+      "country": "United Kingdom"
+    },
+    {
+      "code": "CDG",
+      "name": "Charles de Gaulle Airport",
+      "city": "Paris",
+      "country": "France"
+    },
+    {
+      "code": "FRA",
+      "name": "Frankfurt Airport",
+      "city": "Frankfurt",
+      "country": "Germany"
+    },
+    {
+      "code": "AMS",
+      "name": "Amsterdam Schiphol Airport",
+      "city": "Amsterdam",
+      "country": "Netherlands"
+    },
+    {
+      "code": "BCN",
+      "name": "Barcelona El Prat Airport",
+      "city": "Barcelona",
+      "country": "Spain"
+    }
+  ]
+}

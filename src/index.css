@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Colors */
+    --bg: 218, 100%, 97%;
+    --borders: 231, 23%, 87%;
+    --denim: 213, 96%, 18%;
+    --grey: 231, 11%, 63%;
+    --light-grey: 229, 24%, 87%;
+    --very-light-grey: 231, 100%, 99%;
+    --sky-blue: 206, 94%, 87%;
+    --light-blue: 228, 100%, 83%;
+    --red-error: 354, 84%, 57%;
+    --white: 0, 0%, 100%;
+    --purple: 243 100% 62%;
+
+    /* Border radius */
+    --rounded-full: 50%;
+    --rounded-sm: 0.5rem;
+    --rounded-md: 0.625rem;
+    --rounded-lg: 1rem;
+
+    --background: 222.2 84% 4.9%;
+    --foreground: var(--denim);
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 48 96% 89%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: var(--denim);
+    --primary-foreground: var(--white);
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: var(--grey);
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: var(--light-grey);
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: var(--red-error);
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: var(--borders);
+    --ring: 222.2 84% 4.9%;
+
+    --radius: var(--rounded-sm);
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --warning: 48 96% 89%;
+    --warning-foreground: 38 92% 50%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    font-family: 'Ubuntu', system-ui, sans-serif;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  #root {
+    @apply sm:min-h-screen sm:grid sm:content-center;
+  }
+}
