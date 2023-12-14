@@ -1,21 +1,21 @@
-import useMultiSteps from '@/hooks/useMultiSteps';
 import { cn } from '@/lib/utils';
+import { useSteps } from '@/hooks/useSteps';
 
 const sideBar = ['Search Flight', 'Select Flight', 'Passenger Info', 'Summary'];
 
 export default function Sidebar() {
-  const { currentIndex } = useMultiSteps(sideBar.length + 1);
+  const { currentStep } = useSteps();
 
   return (
-    <aside className="py-8 px-10 bg-purple text-white sm:rounded-md">
+    <aside className="sm:py-8 pt-8 pb-16 sm:px-10 bg-sidebar text-white sm:rounded-md bg-sidebar-pattern bg-no-repeat sm:bg-bottom bg-left bg-contain">
       <ul className="flex sm:flex-col gap-8 justify-center">
         {sideBar.map((item, index) => (
           <li key={item} className="flex gap-x-4 items-center">
             <span
               className={cn(
-                'font-bold text-lg rounded-full border-2 w-10 h-10 flex justify-center items-center',
+                'font-bold text-lg rounded-full border-2 border-white w-10 h-10 flex justify-center items-center',
                 {
-                  'bg-sky-blue text-primary border-transparent': currentIndex === index,
+                  'bg-sky-blue text-denim border-transparent': currentStep === index,
                 },
               )}>
               {index + 1}

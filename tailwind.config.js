@@ -14,13 +14,22 @@ module.exports = {
       center: true,
       padding: '1rem',
       maxWidth: {
-        sm: '940px',
+        base: '940px',
       },
       screens: {
-        sm: '940px',
+        base: '940px',
       },
     },
     extend: {
+      height: {
+        600: 'min(600px, 80vh)',
+      },
+      screens: {
+        mobile: { max: '639px' },
+      },
+      backgroundImage: {
+        'sidebar-pattern': 'url(./src/assets/plane.svg)',
+      },
       colors: {
         warning: 'hsl(var(--warning))',
         'warning-foreground': 'hsl(var(--warning-foreground))',
@@ -29,6 +38,7 @@ module.exports = {
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        denim: 'hsl(var(--denim))',
         purple: 'hsl(var(--purple))',
         'light-blue': 'hsl(var(--light-blue))',
         'sky-blue': 'hsl(var(--sky-blue))',
@@ -56,16 +66,20 @@ module.exports = {
           DEFAULT: 'hsl(var(--popover))',
           foreground: 'hsl(var(--popover-foreground))',
         },
+        sidebar: {
+          DEFAULT: 'hsl(var(--sidebar))',
+        },
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
       },
       fontSize: {
-        xl: '2rem',
-        lg: ['1.125rem', { lineHeight: '1.625rem' }],
-        md: '1rem',
-        sm: '0.875rem',
+        '2xl': ['2rem', { lineHeight: '3.5rem' }],
+        xl: '1.5rem',
+        lg: ['1.25rem', { lineHeight: '1.625rem' }],
+        md: '1.125rem',
+        sm: '1rem',
       },
       fontWeight: {
         regular: '400',
