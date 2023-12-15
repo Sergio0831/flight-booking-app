@@ -15,17 +15,17 @@ function App() {
       <Sidebar />
       <Content>
         <Header />
-        {currentStep === 0 && <BookingForm />}
-        {currentStep === 1 && (
+        {currentStep === 1 && <BookingForm />}
+        {currentStep === 2 && (
           <>
-            <h1>Step {currentStep + 1}</h1>
+            <h1>Step {currentStep}</h1>
             <Button type="button" variant="link" onClick={() => goBackwards()}>
               Go Back
             </Button>
           </>
         )}
-        {currentStep === 2 && <h1>Step {currentStep + 1}</h1>}
-        {currentStep === 3 && <h1>Step {currentStep + 1}</h1>}
+        {currentStep === 3 && <h1>Step {currentStep}</h1>}
+        {currentStep === 4 && <h1>Step {currentStep}</h1>}
       </Content>
     </AppContainer>
   );

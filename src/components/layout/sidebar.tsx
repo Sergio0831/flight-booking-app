@@ -15,7 +15,7 @@ export default function Sidebar() {
               className={cn(
                 'font-bold text-lg rounded-full border-2 border-white w-10 h-10 flex justify-center items-center',
                 {
-                  'bg-sky-blue text-denim border-transparent': currentStep === index,
+                  'bg-sky-blue text-denim border-transparent': currentStep === index + 1,
                 },
               )}>
               {index + 1}

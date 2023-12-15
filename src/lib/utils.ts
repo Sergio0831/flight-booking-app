@@ -30,3 +30,39 @@ export function handleDepartDateChange(
     }
   }
 }
+
+/**
+ * Function to increase passenger
+ *
+ * @param {string} value
+ * @param {UseFormReturn<BookingFormValues>} form
+ * @param {string} field
+ * @param {number} max
+ */
+export function handleIncrease(
+  value: string,
+  form: UseFormReturn<BookingFormValues>,
+  field: 'adults' | 'children',
+  max: number,
+) {
+  const numValue = parseInt(value, 10) || 0;
+  form.setValue(field, Math.min(numValue + 1, max).toString());
+}
+
+/**
+ *  Function to decrease passenger
+ *
+ * @param {string} value
+ * @param {UseFormReturn<BookingFormValues>} form
+ * @param {string} field
+ * @param {number} min
+ */
+export function handleDecrease(
+  value: string,
+  form: UseFormReturn<BookingFormValues>,
+  field: 'adults' | 'children',
+  min: number,
+) {
+  const numValue = parseInt(value, 10) || 0;
+  form.setValue(field, Math.max(numValue - 1, min).toString());
+}

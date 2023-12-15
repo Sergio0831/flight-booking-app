@@ -14,7 +14,7 @@ import data from '../data/airports.json';
 import { useSteps } from '@/hooks/useSteps';
 import { BookingFormValues } from '@/lib/definitions';
 import { bookingFormResolver } from '@/lib/resolvers';
-import { handleDepartDateChange } from '@/lib/utils';
+import { handleDecrease, handleDepartDateChange, handleIncrease } from '@/lib/utils';
 import { Input } from './ui/input';
 
 /**
@@ -32,6 +32,7 @@ export function BookingForm(): JSX.Element {
       tripType: 'return',
       from: 'LHR',
       adults: '1',
+      children: '0',
     },
   });
 
@@ -41,35 +42,18 @@ export function BookingForm(): JSX.Element {
    * @param {BookingFormValues} data
    */
   function onSubmit(data: BookingFormValues) {
-    const { departDate, returnDate, adults } = data;
+    const { departDate, returnDate, adults, children } = data;
     const formatedDepartDate = format(departDate, 'yyyy-MM-dd');
     const formatedReturnDate = returnDate ? format(returnDate, 'yyyy-MM-dd') : '';
     const adultsNumber = Number(adults);
+    const childrenNumber = Number(children);
 
     console.log(`Departure date ${formatedDepartDate}`);
     console.log(`Return date ${formatedReturnDate}`);
     console.log(`Adults ${adultsNumber}`);
-    console.log(`Typeof adult ${typeof adults}`);
+    console.log(`Children ${childrenNumber}`);
 
     goForwards();
-  }
-
-  /**
-   *
-   * @param {string} value
-   */
-  function handleIncrease(value: string) {
-    const numValue = parseInt(value, 10) || 0;
-    form.setValue('adults', Math.min(numValue + 1, 5).toString());
-  }
-
-  /**
-   *
-   * @param {string} value
-   */
-  function handleDecrease(value: string) {
-    const numValue = parseInt(value, 10) || 0;
-    form.setValue('adults', Math.max(numValue - 1, 1).toString());
   }
 
   return (
@@ -106,7 +90,7 @@ export function BookingForm(): JSX.Element {
               </FormControl>
             )}
           />
-          {/* Flight Trip Type start */}
+          {/* Flight Trip Type end */}
 
           {/* Flight Destinations start */}
           <FormItem id="destinations" className="flex flex-wrap gap-x-8    gap-y-4 mb-6">
@@ -273,35 +257,40 @@ export function BookingForm(): JSX.Element {
           {/* Flight Dates end */}
 
           {/* Add passengers start */}
-          <FormItem id="passengers">
-            <FormLabel className="mb-3 block">Passengers:</FormLabel>
-            <FormItem>
+          <FormItem id="passengers" className="w-44">
+            <FormLabel className="mb-4 block">Passengers:</FormLabel>
+            {/* Adults start */}
+            <FormItem className="">
               <FormField
                 control={form.control}
                 name="adults"
                 render={({ field }) => (
-                  <FormItem id="adults" className="flex items-center gap-x-5">
-                    <FormLabel htmlFor="adultsPass">Adults</FormLabel>
-                    <FormItem id="adultsTriggers" className="flex items-center gap-x-3">
+                  <FormItem id="adults" className="flex items-center mb-2">
+                    <FormLabel htmlFor="adultsPass">
+                      Adult{Number(field.value) > 1 && 's'}
+                    </FormLabel>
+                    <FormItem id="adultsTriggers" className="flex items-center justify-end gap-x-3">
                       <Button
+                        disabled={field.value === '1'}
                         type="button"
                         variant="outline"
                         size="icon"
                         aria-label="Increase adults passangers"
                         className="bg-transparent border-none hover:bg-inherit group h-7 w-7"
-                        onClick={() => handleDecrease(field.value)}>
+                        onClick={() => handleDecrease(field.value, form, 'adults', 1)}>
                         <MinusCircleIcon className="group-hover:stroke-muted transition-colors" />
                       </Button>
                       <FormControl>
                         <Input type="hidden" id="adultsPass" {...field} readOnly tabIndex={-1} />
                       </FormControl>
-                      <span className="font-semi text-md">{field.value}</span>
+                      <span className="font-semi text-md select-none">{field.value}</span>
                       <Button
+                        disabled={field.value === '5'}
                         type="button"
                         variant="outline"
                         size="icon"
                         className="bg-transparent border-none hover:bg-inherit h-7 w-7 group"
-                        onClick={() => handleIncrease(field.value)}>
+                        onClick={() => handleIncrease(field.value, form, 'adults', 5)}>
                         <PlusCircleIcon className="group-hover:stroke-muted transition-colors" />
                       </Button>
                     </FormItem>
@@ -310,6 +299,49 @@ export function BookingForm(): JSX.Element {
                 )}
               />
             </FormItem>
+            {/* Adults end */}
+
+            {/* Children start */}
+            <FormItem>
+              <FormField
+                control={form.control}
+                name="children"
+                render={({ field }) => (
+                  <FormItem id="children" className="flex items-center">
+                    <FormLabel htmlFor="childrenPass">Children</FormLabel>
+                    <FormItem
+                      id="childrenTriggers"
+                      className="flex items-center justify-end gap-x-3">
+                      <Button
+                        disabled={field.value === '0'}
+                        type="button"
+                        variant="outline"
+                        size="icon"
+                        aria-label="Increase children passangers"
+                        className="bg-transparent border-none hover:bg-inherit group h-7 w-7"
+                        onClick={() => handleDecrease(field.value, form, 'children', 0)}>
+                        <MinusCircleIcon className="group-hover:stroke-muted transition-colors" />
+                      </Button>
+                      <FormControl>
+                        <Input type="hidden" id="childrenPass" {...field} readOnly tabIndex={-1} />
+                      </FormControl>
+                      <span className="font-semi text-md select-none">{field.value}</span>
+                      <Button
+                        disabled={field.value === '5'}
+                        type="button"
+                        variant="outline"
+                        size="icon"
+                        className="bg-transparent border-none hover:bg-inherit h-7 w-7 group"
+                        onClick={() => handleIncrease(field.value, form, 'children', 5)}>
+                        <PlusCircleIcon className="group-hover:stroke-muted transition-colors" />
+                      </Button>
+                    </FormItem>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </FormItem>
+            {/* Children end */}
           </FormItem>
           {/* Add passengers end */}
         </FormItem>

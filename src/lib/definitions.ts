@@ -5,5 +5,5 @@ export type BookingFormValues = {
   departDate: Date;
   returnDate: Date;
   adults: string;
-  kids?: string;
+  children: string;
 };
