@@ -26,6 +26,7 @@ module.exports = {
       },
       screens: {
         mobile: { max: '639px' },
+        xs: { max: '460px' },
       },
       backgroundImage: {
         'sidebar-pattern': 'url(./src/assets/plane.svg)',
@@ -80,6 +81,7 @@ module.exports = {
         lg: ['1.25rem', { lineHeight: '1.625rem' }],
         md: '1.125rem',
         sm: '1rem',
+        s: '0.875rem',
       },
       fontWeight: {
         regular: '400',

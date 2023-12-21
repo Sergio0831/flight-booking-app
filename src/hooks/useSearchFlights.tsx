@@ -1,11 +1,10 @@
 import { customFetch } from '@/lib/customFetch';
 import { SearchFlightsParams } from '@/lib/definitions';
-
 import { useMutation } from '@tanstack/react-query';
-import { useOfferId } from './useOfferId';
+import { useOfferRequestId } from './useOfferRequestId';
 
 export const useSearchFlights = () => {
-  const { setOfferId } = useOfferId();
+  const { setOfferRequestId } = useOfferRequestId();
 
   const { mutate: searchFlights, isPending } = useMutation({
     mutationKey: ['offers'],
@@ -29,7 +28,7 @@ export const useSearchFlights = () => {
       }),
     onSuccess: (data) => {
       console.log('slice created');
-      setOfferId(data.data);
+      setOfferRequestId(data.data);
     },
     onError: (error) => {
       console.log(error);

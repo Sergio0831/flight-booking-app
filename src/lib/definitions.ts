@@ -27,22 +27,25 @@ type Passenger = {
   type: string;
 };
 
-type Segment = {
+export type Segment = {
+  segmentId: string;
   departingAt: string;
   arrivingAt: string;
   airlineLogo: string;
 };
 
-type Slice = {
+export type Slice = {
+  sliceId: string;
   duration: string;
   origin: string;
+  originCity: string;
   destination: string;
+  destinationCity: string;
   segments: Segment[];
 };
 
 export type Offer = {
   id: string;
-  airlineLogo: string;
   totalAmount: string;
   totalCurrency: string;
   passengers: Passenger[];

@@ -66,3 +66,24 @@ export function handleDecrease(
   const numValue = parseInt(value, 10) || 0;
   form.setValue(field, Math.max(numValue - 1, min).toString());
 }
+
+export function formatDuration(duration: string): string {
+  const match = duration.match(/PT(\d+)H(?:([\d]+)M)?/);
+
+  if (match) {
+    const hours = match[1];
+    const minutes = match[2];
+
+    return minutes ? `${hours}h ${minutes}m` : `${hours}h 0m`;
+  } else {
+    return 'Invalid duration format';
+  }
+}
+
+export function toCurrency(v: number, currency: string) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency,
+    signDisplay: 'never',
+  }).format(v);
+}
