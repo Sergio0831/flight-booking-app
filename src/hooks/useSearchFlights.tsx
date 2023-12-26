@@ -17,7 +17,7 @@ export const useSearchFlights = () => {
       adults,
       children,
     }: SearchFlightsParams) =>
-      customFetch.post('/offers', {
+      customFetch.post('/offer_requests', {
         tripType,
         destination,
         from,
@@ -27,7 +27,6 @@ export const useSearchFlights = () => {
         children,
       }),
     onSuccess: (data) => {
-      console.log('slice created');
       setOfferRequestId(data.data);
     },
     onError: (error) => {

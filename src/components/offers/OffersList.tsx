@@ -2,13 +2,15 @@ import { useSteps } from '@/hooks/useSteps';
 import { Button } from '../ui/button';
 import { useFetchOffers } from '@/hooks/useFetchOffers';
 import { useOfferRequestId } from '@/hooks/useOfferRequestId';
-import SingleOffer from './single-offer';
+import SingleOffer from './SingleOffer';
 import { useAirportsCities } from '@/hooks/useAirportsCities';
 import { ArrowRightIcon, ArrowRightLeftIcon } from 'lucide-react';
+import { useOfferId } from '@/hooks/useOfferId';
 
 export default function OffersList() {
-  const { goBackwards } = useSteps();
+  const { goBackwards, goForwards, goToSection } = useSteps();
   const { offerRequestId } = useOfferRequestId();
+  const { setOfferId } = useOfferId();
   const { data, isLoading } = useFetchOffers(offerRequestId);
   const { airportCity } = useAirportsCities();
 
@@ -16,8 +18,14 @@ export default function OffersList() {
     return <h2>Loading...</h2>;
   }
 
+  if (!data || !data.offers || data.offers.length === 0) {
+    // If data is not available or there are no offers, go to section 1
+    goToSection(1);
+    return null;
+  }
+
   return (
-    <div>
+    <>
       <h1 className="mb-5 font-medium text-xl">
         {airportCity.originCity}{' '}
         <span className="inline-block text-muted mx-1">
@@ -35,6 +43,10 @@ export default function OffersList() {
             return (
               <li key={offer.id}>
                 <a
+                  onClick={() => {
+                    setOfferId(offer.id);
+                    goForwards();
+                  }}
                   className="cursor-pointer group"
                   aria-label={`Offer price ${offer.totalAmount} ${offer.totalCurrency}`}>
                   <SingleOffer
@@ -50,6 +62,6 @@ export default function OffersList() {
       <Button type="button" variant="link" onClick={() => goBackwards()}>
         Go Back
       </Button>
-    </div>
+    </>
   );
 }

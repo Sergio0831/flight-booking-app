@@ -31,7 +31,7 @@ export default function OfferSliceSegment({
           <span className="text-muted">{origin}</span>
         </div>
         <div className="grid items-center justify-items-center">
-          <PlaneTakeoffIcon size={18} strokeWidth={1} />
+          <PlaneTakeoffIcon size={18} strokeWidth={1}/>
           <span className="text-xs text-muted">{formatDuration(duration)}</span>
         </div>
         <div className="grid text-center">

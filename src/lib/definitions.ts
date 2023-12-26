@@ -1,3 +1,6 @@
+import { z } from 'zod';
+
+// Booking form types
 export type BookingFormValues = {
   tripType: 'return' | 'one way';
   from: string;
@@ -13,6 +16,41 @@ export type SearchFlightsParams = Omit<BookingFormValues, 'departDate' | 'return
   formatedReturnDate: string;
 };
 
+// Passenger form types
+const passengerSchema = z.object({
+  title: z
+    .string({
+      required_error: 'Select title',
+    })
+    .trim(),
+  gender: z
+    .string({
+      required_error: 'Select gender',
+    })
+    .trim(),
+  dob: z.date({
+    required_error: 'Select date of birth',
+  }),
+  firstName: z
+    .string({
+      required_error: 'First name is required',
+    })
+    .trim()
+    .min(2, { message: 'First name must be at least 2 characters.' }),
+  familyName: z
+    .string({
+      required_error: 'Family name is required',
+    })
+    .min(2, { message: 'Family name must be at least 2 characters.' })
+    .trim(),
+});
+
+export const passengerFormValuesSchema = z.object({
+  passengers: z.array(passengerSchema),
+});
+
+export type PassengersFormValues = z.infer<typeof passengerFormValuesSchema>;
+
 // Airport type
 export type Airport = {
   code: string;
@@ -21,10 +59,13 @@ export type Airport = {
   country: string;
 };
 
+// Passenger type
+export type PassengerType = 'adult' | 'child';
+
 // Flights offers types
-type Passenger = {
+export type Passenger = {
   id: string;
-  type: string;
+  type: PassengerType;
 };
 
 export type Segment = {

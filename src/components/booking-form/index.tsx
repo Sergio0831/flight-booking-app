@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { add, format, isDate } from 'date-fns';
-import { CalendarDaysIcon, Loader2Icon } from 'lucide-react';
+import { Loader2Icon } from 'lucide-react';
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
@@ -165,7 +165,6 @@ export function BookingForm(): JSX.Element {
                   id="departDate"
                   dateValue={field.value}
                   placeholder="Choose Date"
-                  icon={<CalendarDaysIcon strokeWidth={1} />}
                   selected={field.value}
                   onSelect={(date) => {
                     field.onChange(date);
@@ -194,7 +193,6 @@ export function BookingForm(): JSX.Element {
                     id="returnDate"
                     dateValue={field.value}
                     placeholder="Choose Date"
-                    icon={<CalendarDaysIcon strokeWidth={1} />}
                     selected={field.value}
                     onSelect={field.onChange}
                     fromDate={

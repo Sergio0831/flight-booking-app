@@ -74,7 +74,7 @@ export function StepsProvider({
     goForwards,
     goBackwards,
     goToSection,
-    isFirstStep: currentStep === 0,
+    isFirstStep: currentStep === 1,
     isLastStep: currentStep === steps,
     isConfirmation: currentStep === steps,
   };

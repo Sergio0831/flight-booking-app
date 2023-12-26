@@ -2,7 +2,7 @@ import { ArrowRightIcon } from 'lucide-react';
 import { Offer } from '@/lib/definitions';
 import { cn, toCurrency } from '@/lib/utils';
 import { Button } from '../ui/button';
-import OfferSlice from './offer-slice';
+import OfferSlice from './OfferSlice';
 
 type OfferProps = {
   offer: Offer;

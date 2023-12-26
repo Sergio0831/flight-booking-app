@@ -15,8 +15,14 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
       classNames={{
         months: 'flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0',
         month: 'space-y-4',
-        caption: 'flex justify-center pt-1 relative items-center',
-        caption_label: 'text-sm font-medium',
+        caption: 'flex justify-center relative items-center justify-between',
+        caption_label:
+          'text-sm font-medium items-center inline-flex gap-x-3 peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2 rounded-[5px]',
+        caption_dropdowns: 'flex gap-x-5',
+        dropdown:
+          'appearance-none bg-transparent absolute border-0 w-full p-0 overflow-hidden whitespace-nowrap top-0 bottom-0 left-0 text-inherit opacity-0 z-2 cursor-pointer peer',
+        dropdown_month: 'inline-flex items-center relative',
+        dropdown_year: 'inline-flex items-center relative',
         nav: 'space-x-1 flex items-center',
         nav_button: cn(
           buttonVariants({ variant: 'outline' }),
@@ -42,6 +48,8 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
         day_disabled: 'text-muted-foreground opacity-50',
         day_range_middle: 'aria-selected:bg-accent aria-selected:text-accent-foreground',
         day_hidden: 'invisible',
+        vhidden:
+          'appearance-none absolute border-0 w-1 h-1 p-0 -m-[1px] overflow-hidden whitespace-nowrap top-0',
         ...classNames,
       }}
       components={{
