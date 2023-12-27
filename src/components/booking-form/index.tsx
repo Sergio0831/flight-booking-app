@@ -15,10 +15,10 @@ import { BookingFormValues } from '@/lib/definitions';
 import { bookingFormResolver } from '@/lib/resolvers';
 import { handleDecrease, handleDepartDateChange, handleIncrease } from '@/lib/utils';
 
-import Dropdown from './dropdown';
-import DatePicker from './date-picker';
-import Counter from './counter';
+import DatePicker from './DatePicker';
 import { useAirportsCities } from '@/hooks/useAirportsCities';
+import Dropdown from './Dropdown';
+import Counter from './Counter';
 
 /**
  * Component for the Booking Form.
@@ -26,7 +26,7 @@ import { useAirportsCities } from '@/hooks/useAirportsCities';
  *
  * @returns {JSX.Element}
  */
-export function BookingForm(): JSX.Element {
+export default function BookingForm(): JSX.Element {
   const { goForwards } = useSteps();
   const { searchFlights, isPending } = useSearchFlights();
   const { setAirportCity } = useAirportsCities();
@@ -72,17 +72,14 @@ export function BookingForm(): JSX.Element {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="grid grid-cols-1 h-full justify-between">
+        className="grid grid-cols-1 h-full justify-between gap-y-5">
         {/* Flight Trip Type start */}
         <FormField
           control={form.control}
           name="tripType"
           render={({ field }) => (
             <FormControl>
-              <RadioGroup
-                onValueChange={field.onChange}
-                defaultValue="return"
-                className="gap-x-8 mb-8">
+              <RadioGroup onValueChange={field.onChange} defaultValue="return" className="gap-x-8 ">
                 <FormItem className="flex grow-0 items-center space-x-3">
                   <FormControl>
                     <RadioGroupItem value="return" id="return" />
@@ -104,113 +101,113 @@ export function BookingForm(): JSX.Element {
           )}
         />
         {/* Flight Trip Type end */}
-
-        {/* Flight Airports start */}
-        <div className="flex flex-wrap gap-x-8 gap-y-4 mb-6">
-          {/* Origin start */}
-          <FormField
-            control={form.control}
-            name="from"
-            render={({ field }) => (
-              <FormItem id="origin-airport">
-                <FormLabel className="block mb-2">From:</FormLabel>
-                <Dropdown
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  placeholder="Select airport"
-                  options={airports.airports.filter(
-                    (airport) => airport.code !== form.getValues('destination'),
-                  )}
-                />
-                <FormMessage className="mt-1" />
-              </FormItem>
-            )}
-          />
-          {/* Origin end */}
-          {/* Destination start */}
-          <FormField
-            control={form.control}
-            name="destination"
-            render={({ field }) => (
-              <FormItem id="destination-airport">
-                <FormLabel className="block mb-2">To:</FormLabel>
-                <Dropdown
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  placeholder="Select airport"
-                  options={airports.airports.filter(
-                    (airport) => airport.code !== form.getValues('from'),
-                  )}
-                />
-                <FormMessage className="mt-2" />
-              </FormItem>
-            )}
-          />
-          {/* Destination end */}
-        </div>
-        {/* Flight Airports end */}
-
-        {/* Flight Dates start */}
-        <div className="flex flex-wrap gap-x-8 gap-y-4 mb-8">
-          {/* Depart date start */}
-          <FormField
-            control={form.control}
-            name="departDate"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel htmlFor="departDate" className="block mb-2">
-                  Depart:
-                </FormLabel>
-                <DatePicker
-                  id="departDate"
-                  dateValue={field.value}
-                  placeholder="Choose Date"
-                  selected={field.value}
-                  onSelect={(date) => {
-                    field.onChange(date);
-                    handleDepartDateChange(form, date);
-                  }}
-                  fromDate={add(new Date(), { days: 1 })}
-                  toDate={add(new Date(), { years: 1 })}
-                />
-                <FormMessage className="mt-1" />
-              </FormItem>
-            )}
-          />
-          {/* Depart date end */}
-
-          {/* Return date start */}
-          {form.getValues('tripType') === 'return' && (
+        <div>
+          {/* Flight Airports start */}
+          <div className="flex flex-wrap gap-x-8 gap-y-4 mb-6">
+            {/* Origin start */}
             <FormField
               control={form.control}
-              name="returnDate"
+              name="from"
+              render={({ field }) => (
+                <FormItem id="origin-airport">
+                  <FormLabel className="block mb-2">From:</FormLabel>
+                  <Dropdown
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    placeholder="Select airport"
+                    options={airports.airports.filter(
+                      (airport) => airport.code !== form.getValues('destination'),
+                    )}
+                  />
+                  <FormMessage className="mt-1" />
+                </FormItem>
+              )}
+            />
+            {/* Origin end */}
+            {/* Destination start */}
+            <FormField
+              control={form.control}
+              name="destination"
+              render={({ field }) => (
+                <FormItem id="destination-airport">
+                  <FormLabel className="block mb-2">To:</FormLabel>
+                  <Dropdown
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    placeholder="Select airport"
+                    options={airports.airports.filter(
+                      (airport) => airport.code !== form.getValues('from'),
+                    )}
+                  />
+                  <FormMessage className="mt-2" />
+                </FormItem>
+              )}
+            />
+            {/* Destination end */}
+          </div>
+          {/* Flight Airports end */}
+
+          {/* Flight Dates start */}
+          <div className="flex flex-wrap gap-x-8 gap-y-4">
+            {/* Depart date start */}
+            <FormField
+              control={form.control}
+              name="departDate"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="returnDate" className="block mb-2">
-                    Return:
+                  <FormLabel htmlFor="departDate" className="block mb-2">
+                    Depart:
                   </FormLabel>
                   <DatePicker
-                    id="returnDate"
+                    id="departDate"
                     dateValue={field.value}
                     placeholder="Choose Date"
                     selected={field.value}
-                    onSelect={field.onChange}
-                    fromDate={
-                      isDate(form.getValues('departDate'))
-                        ? form.getValues('departDate')
-                        : add(new Date(), { days: 1 })
-                    }
+                    onSelect={(date) => {
+                      field.onChange(date);
+                      handleDepartDateChange(form, date);
+                    }}
+                    fromDate={add(new Date(), { days: 1 })}
                     toDate={add(new Date(), { years: 1 })}
                   />
                   <FormMessage className="mt-1" />
                 </FormItem>
               )}
             />
-          )}
-          {/* Return date end */}
-        </div>
-        {/* Flight Dates end */}
+            {/* Depart date end */}
 
+            {/* Return date start */}
+            {form.getValues('tripType') === 'return' && (
+              <FormField
+                control={form.control}
+                name="returnDate"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel htmlFor="returnDate" className="block mb-2">
+                      Return:
+                    </FormLabel>
+                    <DatePicker
+                      id="returnDate"
+                      dateValue={field.value}
+                      placeholder="Choose Date"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      fromDate={
+                        isDate(form.getValues('departDate'))
+                          ? form.getValues('departDate')
+                          : add(new Date(), { days: 1 })
+                      }
+                      toDate={add(new Date(), { years: 1 })}
+                    />
+                    <FormMessage className="mt-1" />
+                  </FormItem>
+                )}
+              />
+            )}
+            {/* Return date end */}
+          </div>
+          {/* Flight Dates end */}
+        </div>
         {/* Passengers start */}
         <div className="w-44 mobile:mb-6">
           <FormLabel className="mb-4 block">Passengers:</FormLabel>

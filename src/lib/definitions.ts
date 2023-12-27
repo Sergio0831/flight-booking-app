@@ -17,17 +17,14 @@ export type SearchFlightsParams = Omit<BookingFormValues, 'departDate' | 'return
 };
 
 // Passenger form types
+
 const passengerSchema = z.object({
-  title: z
-    .string({
-      required_error: 'Select title',
-    })
-    .trim(),
-  gender: z
-    .string({
-      required_error: 'Select gender',
-    })
-    .trim(),
+  title: z.enum(['mr', 'ms', 'mrs', 'MR', 'MS', 'MRS'], {
+    required_error: 'Select title',
+  }),
+  gender: z.enum(['m', 'f'], {
+    required_error: 'Select gender',
+  }),
   dob: z.date({
     required_error: 'Select date of birth',
   }),
@@ -48,6 +45,8 @@ const passengerSchema = z.object({
 export const passengerFormValuesSchema = z.object({
   passengers: z.array(passengerSchema),
 });
+
+export type PassengerValues = z.infer<typeof passengerSchema>;
 
 export type PassengersFormValues = z.infer<typeof passengerFormValuesSchema>;
 
@@ -89,10 +88,26 @@ export type Offer = {
   id: string;
   totalAmount: string;
   totalCurrency: string;
-  passengers: Passenger[];
   slices: Slice[];
 };
 
 export type Offers = {
   offers: Offer[];
+};
+
+// Order type
+export type OrderPassenger = {
+  id: string | undefined;
+  dob: string;
+  title: 'mr' | 'ms' | 'mrs' | 'MR' | 'MS' | 'MRS';
+  gender: 'm' | 'f';
+  firstName: string;
+  familyName: string;
+};
+
+export type Order = {
+  totalAmount: string;
+  totalCurrency: string;
+  passengers: OrderPassenger[];
+  slices: Slice[];
 };

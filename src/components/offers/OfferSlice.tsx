@@ -5,6 +5,10 @@ type OfferSliceProps = {
   slice: Slice;
 };
 
+/**
+ * OfferSlice component for displaying offer slice information.
+ * @param slice - The offer slice data.
+ */
 export default function OfferSlice({ slice }: OfferSliceProps) {
   const { destination, duration, origin, segments } = slice;
 

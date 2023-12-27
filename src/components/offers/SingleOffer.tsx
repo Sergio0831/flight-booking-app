@@ -9,6 +9,12 @@ type OfferProps = {
   className?: string;
 };
 
+/**
+ * SingleOffer component for displaying a single offer.
+ * @param {Object} props - Component props
+ * @param {Object} props.offer - Offer data
+ * @param {string} props.className - Additional class names for styling
+ */
 export default function SingleOffer({ offer, className }: OfferProps) {
   const { slices, totalAmount, totalCurrency } = offer;
 

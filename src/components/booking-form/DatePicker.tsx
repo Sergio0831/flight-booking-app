@@ -18,6 +18,17 @@ type DatePickerProps = {
   id: string;
 };
 
+/**
+ * DatePicker component for selecting dates.
+ * @param dateValue - The selected date value.
+ * @param placeholder - The placeholder text when no date is selected.
+ * @param selected - The selected date or dates.
+ * @param captionLayout - The layout for the calendar caption.
+ * @param onSelect - Callback function when a date is selected.
+ * @param fromDate - The earliest selectable date.
+ * @param toDate - The latest selectable date.
+ * @param id - The unique identifier for the DatePicker component.
+ */
 export default function DatePicker({
   dateValue,
   placeholder,

@@ -6,7 +6,11 @@ import SingleOffer from './SingleOffer';
 import { useAirportsCities } from '@/hooks/useAirportsCities';
 import { ArrowRightIcon, ArrowRightLeftIcon } from 'lucide-react';
 import { useOfferId } from '@/hooks/useOfferId';
+import Loader from '../loader';
 
+/**
+ * OffersList component for displaying a list of offers.
+ */
 export default function OffersList() {
   const { goBackwards, goForwards, goToSection } = useSteps();
   const { offerRequestId } = useOfferRequestId();
@@ -15,7 +19,7 @@ export default function OffersList() {
   const { airportCity } = useAirportsCities();
 
   if (isLoading) {
-    return <h2>Loading...</h2>;
+    return <Loader />;
   }
 
   if (!data || !data.offers || data.offers.length === 0) {

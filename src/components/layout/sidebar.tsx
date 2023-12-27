@@ -3,6 +3,9 @@ import { useSteps } from '@/hooks/useSteps';
 
 const sideBar = ['Search Flight', 'Select Flight', 'Passenger Info', 'Summary'];
 
+/**
+ * Sidebar component for displaying navigation steps.
+ */
 export default function Sidebar() {
   const { currentStep } = useSteps();
 

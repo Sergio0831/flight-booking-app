@@ -2,6 +2,10 @@ type AppContainerProps = {
   children: React.ReactNode;
 };
 
+/**
+ * AppContainer component for wrapping content with styling and layout.
+ * @param children - The content to be wrapped by the AppContainer.
+ */
 const AppContainer = ({ children }: AppContainerProps) => {
   return (
     <div className="sm:container">

@@ -1,4 +1,4 @@
-import PassengersForm from '../passengers-form';
+import PassengersForm from './PassengersForm';
 
 export default function PassengersInfo() {
   return (

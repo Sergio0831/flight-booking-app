@@ -10,6 +10,13 @@ type OfferSliceSegmentProps = {
   destination: string;
 };
 
+/**
+ * OfferSliceSegment component for displaying information about a segment of an offer slice.
+ * @param segment - The segment data.
+ * @param duration - The duration of the segment.
+ * @param origin - The origin of the segment.
+ * @param destination - The destination of the segment.
+ */
 export default function OfferSliceSegment({
   segment,
   duration,
@@ -31,7 +38,7 @@ export default function OfferSliceSegment({
           <span className="text-muted">{origin}</span>
         </div>
         <div className="grid items-center justify-items-center">
-          <PlaneTakeoffIcon size={18} strokeWidth={1}/>
+          <PlaneTakeoffIcon size={18} strokeWidth={1} />
           <span className="text-xs text-muted">{formatDuration(duration)}</span>
         </div>
         <div className="grid text-center">

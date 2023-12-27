@@ -26,6 +26,15 @@ type CounterProps = {
   ) => void;
 };
 
+/**
+ * Counter component for adjusting passenger counts.
+ * @param field - The form field object.
+ * @param maxPassengers - The maximum number of passengers allowed.
+ * @param minPassengers - The minimum number of passengers allowed.
+ * @param form - The form object from react-hook-form.
+ * @param onDecrease - Callback function for decreasing passenger count.
+ * @param onIncrease - Callback function for increasing passenger count.
+ */
 export default function Counter({
   field,
   maxPassengers,

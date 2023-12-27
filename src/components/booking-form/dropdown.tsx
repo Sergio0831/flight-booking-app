@@ -9,6 +9,13 @@ type DropdownProps = {
   options: Airport[];
 };
 
+/**
+ * Dropdown component for selecting options.
+ * @param onValueChange - Callback function when the selected value changes.
+ * @param defaultValue - The default selected value.
+ * @param placeholder - The placeholder text when no option is selected.
+ * @param options - The array of options to display in the dropdown.
+ */
 export default function Dropdown({
   onValueChange,
   defaultValue,

@@ -9,16 +9,23 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
-import { PassengersFormValues, passengerFormValuesSchema } from '@/lib/definitions';
-import DatePicker from '../booking-form/date-picker';
-import { sub } from 'date-fns';
+import { Passenger, PassengersFormValues, passengerFormValuesSchema } from '@/lib/definitions';
+import DatePicker from '../booking-form/DatePicker';
+import { format, sub } from 'date-fns';
+import { useQueryClient } from '@tanstack/react-query';
+import { useCreateOrder } from '@/hooks/useCreateOrder';
+import { Loader2Icon } from 'lucide-react';
+import Loader from '../loader';
 
 export default function PassengersForm() {
-  const { goBackwards, goToSection } = useSteps();
+  const { goBackwards, goToSection, goForwards } = useSteps();
   const { offerId } = useOfferId();
   const { data, isLoading } = useFetchOffer(offerId);
+  const queryClient = useQueryClient();
+  const offerData = queryClient.getQueryData<{ passengers: Passenger[] }>(['offer', offerId]);
+  const { createOrder, isPending } = useCreateOrder();
 
-  const counts = {
+  const passengersCounts = {
     adult: 0,
     child: 0,
   };
@@ -27,12 +34,34 @@ export default function PassengersForm() {
     resolver: zodResolver(passengerFormValuesSchema),
   });
 
-  function onSubmit(data: PassengersFormValues) {
-    console.log(data.passengers);
+  function onSubmit(values: PassengersFormValues) {
+    const passengersWithIds = values.passengers.map((pass, index) => {
+      const passenger = offerData?.passengers[index];
+
+      return {
+        id: passenger?.id,
+        bornOn: format(pass.dob, 'yyyy-MM-dd'),
+        title: pass.title,
+        gender: pass.gender,
+        firstName: pass.firstName,
+        familyName: pass.familyName,
+      };
+    });
+
+    const requestData = {
+      selectedOffer: offerId,
+      passengers: passengersWithIds,
+    };
+
+    createOrder(requestData, {
+      onSuccess() {
+        goForwards();
+      },
+    });
   }
 
   if (isLoading) {
-    return <h2>Loading...</h2>;
+    return <Loader />;
   }
 
   if (!data || !data.passengers || data.passengers.length === 0) {
@@ -51,11 +80,11 @@ export default function PassengersForm() {
               let passengerLabel = '';
 
               if (pass.type === 'adult') {
-                counts.adult++;
-                passengerLabel = typeCount > 1 ? `Adult ${counts.adult}:` : 'Adult:';
+                passengersCounts.adult++;
+                passengerLabel = typeCount > 1 ? `Adult ${passengersCounts.adult}:` : 'Adult:';
               } else if (pass.type === 'child') {
-                counts.child++;
-                passengerLabel = typeCount > 1 ? `Child ${counts.child}:` : 'Child:';
+                passengersCounts.child++;
+                passengerLabel = typeCount > 1 ? `Child ${passengersCounts.child}:` : 'Child:';
               }
 
               return (
@@ -100,14 +129,13 @@ export default function PassengersForm() {
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="mr">Mr.</SelectItem>
+                              <SelectItem value="MR">Mr.</SelectItem>
                               {pass.type === 'adult' && (
                                 <>
-                                  <SelectItem value="ms">Ms.</SelectItem>
-                                  <SelectItem value="mrs">Mrs.</SelectItem>
+                                  <SelectItem value="MRS">Mrs.</SelectItem>
                                 </>
                               )}
-                              <SelectItem value="miss">Miss.</SelectItem>
+                              <SelectItem value="MS">Ms.</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -165,6 +193,7 @@ export default function PassengersForm() {
                       )}
                     />
                     {/* Passenger first name end */}
+
                     {/* Passenger family name start */}
                     <FormField
                       control={form.control}
@@ -197,8 +226,15 @@ export default function PassengersForm() {
           <Button type="button" variant="link" onClick={() => goBackwards()}>
             Go Back
           </Button>
-          <Button type="submit" className="ml-auto">
-            Submit
+          <Button type="submit" className="ml-auto gap-x-1" disabled={isPending}>
+            {isPending ? (
+              <>
+                Submiting
+                <Loader2Icon size={18} strokeWidth={3} className="animate-spin" />
+              </>
+            ) : (
+              'Submit'
+            )}
           </Button>
         </div>
       </form>
