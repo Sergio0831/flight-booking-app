@@ -216,7 +216,7 @@ export default function BookingForm(): JSX.Element {
             control={form.control}
             name="adults"
             render={({ field }) => (
-              <FormItem id={field.name} className="flex items-center justify-between mb-2">
+              <FormItem className="flex items-center justify-between mb-2">
                 <FormLabel htmlFor={field.name}>Adult{Number(field.value) > 1 && 's'}</FormLabel>
                 <Counter
                   minPassengers="1"
@@ -236,8 +236,8 @@ export default function BookingForm(): JSX.Element {
             control={form.control}
             name="children"
             render={({ field }) => (
-              <FormItem id={field.name} className="flex items-center justify-between">
-                <FormLabel htmlFor="childrenPass">Children</FormLabel>
+              <FormItem className="flex items-center justify-between">
+                <FormLabel htmlFor={field.name}>Children</FormLabel>
                 <Counter
                   minPassengers="0"
                   maxPassengers="3"
