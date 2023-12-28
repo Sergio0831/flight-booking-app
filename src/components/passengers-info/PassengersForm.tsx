@@ -160,8 +160,16 @@ export default function PassengersForm() {
                             placeholder="Choose Date"
                             selected={field.value}
                             onSelect={field.onChange}
-                            fromDate={new Date('1950-12-12')}
-                            toDate={sub(new Date(), { days: 1 })}
+                            fromDate={
+                              pass.type === 'adult'
+                                ? new Date('1950-12-12')
+                                : sub(new Date(), { years: 15 })
+                            }
+                            toDate={
+                              pass.type === 'adult'
+                                ? sub(new Date(), { years: 15, days: 1 })
+                                : sub(new Date(), { days: 1 })
+                            }
                           />
                           <FormMessage />
                         </FormItem>

@@ -23,6 +23,9 @@ export default function Error() {
   return (
     <div className="container">
       <h1 className="text-xl font-bold">Something went wrong!</h1>
+      <Button type="button" variant="outline" onClick={() => navigate('/')}>
+        Go Back
+      </Button>
     </div>
   );
 }

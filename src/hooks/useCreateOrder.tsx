@@ -22,7 +22,7 @@ export const useCreateOrder = () => {
       setOrderId(data.data);
     },
     onError: (error) => {
-      console.log(error);
+      console.log(error.message);
     },
   });
 

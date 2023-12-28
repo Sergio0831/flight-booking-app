@@ -17,6 +17,11 @@ export default function Summary() {
     return <Loader />;
   }
 
+  if (!data || !data.order) {
+    goToSection(1);
+    return null;
+  }
+
   return (
     <div className="h-full grid">
       <div>
