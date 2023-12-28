@@ -8,6 +8,7 @@ This is a Flight Booking App. With real time flights using Duffel API.
 - [Overview](#overview)
   - [Screenshots](#screenshots)
   - [Folder Structure](#folderstructure)
+  - [Folder Structure Explanation](#folderstructureexplanation)
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
@@ -26,11 +27,11 @@ This is a Flight Booking App. With real time flights using Duffel API.
 
 #### Desktop
 
-![](./screenshot-desktop.png)
+![](./screenshot-desktop.jpg)
 
 #### Mobile
 
-![](./screenshot-mobile.png)
+![](./screenshot-mobile.jpg)
 
 ### Folder Structure
 
@@ -63,7 +64,33 @@ This is a Flight Booking App. With real time flights using Duffel API.
 └─ vite.config.ts
 ```
 
-#### Explanation
+### Folder Structure Explanation
+
+- **/public:** Contains static assets.
+- **/src:** Holds the source code of the application.
+  - **/components:** Reusable React components.
+  - **/data:** Data-related airports.
+  - **/hooks:** Custom React hooks.
+  - **/lib:** Utility or helper functions.
+  - **/providers:** Context providers for state management.
+  - **/routes:** Navigation components or route configurations.
+  - **App.tsx:** Main React component that serves as the entry point.
+  - **index.css:** Styles for the application.
+  - **main.tsx:** Main TypeScript file.
+  - **vite-env.d.ts:** TypeScript declaration file for Vite.
+- **.env:** Configuration file for environment variables.
+- **.eslintrc.cjs:** ESLint configuration file for linting rules.
+- **.gitignore:** Specifies files and directories ignored by Git.
+- **components.json:** Configuration or metadata related to components.
+- **index.html:** Main HTML file, the entry point for the web application.
+- **package.json:** Manages project dependencies, scripts, and metadata.
+- **package-lock.json:** Locks down versions of dependencies for consistent installations.
+- **postcss.config.js:** Configuration file for PostCSS, used for transforming styles.
+- **README.md:** Documentation file for the project.
+- **tailwind.config.js:** Configuration file for the Tailwind CSS framework.
+- **tsconfig.json:** TypeScript configuration file for compiler options.
+- **tsconfig.node.json:** TypeScript configuration for Node.js-related settings.
+- **vite.config.ts:** Configuration file for the Vite frontend build tool.
 
 ### Links
 
