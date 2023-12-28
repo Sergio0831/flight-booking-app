@@ -1,8 +1,7 @@
 import { Suspense, lazy } from 'react';
 
-import AppContainer from './components/layout/AppContainer';
-
 import { useSteps } from './hooks/useSteps';
+import AppContainer from './components/layout/AppContainer';
 import Sidebar from './components/layout/Sidebar';
 import Content from './components/layout/Content';
 import Loader from './components/loader';
