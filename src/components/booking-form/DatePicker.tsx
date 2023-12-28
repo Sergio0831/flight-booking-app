@@ -47,7 +47,7 @@ export default function DatePicker({
         <FormControl>
           <Button
             id={id}
-            aria-label="Open/Close Calendar"
+            aria-label="Choose Date"
             variant="outline"
             className="bg-transparent hover:bg-inherit w-full px-3 justify-between">
             {dateValue ? format(dateValue, 'yyyy-MM-dd') : <span>{placeholder}</span>}

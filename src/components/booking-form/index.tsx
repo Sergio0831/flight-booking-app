@@ -82,7 +82,7 @@ export default function BookingForm(): JSX.Element {
               <RadioGroup onValueChange={field.onChange} defaultValue="return" className="gap-x-8 ">
                 <FormItem className="flex grow-0 items-center space-x-3">
                   <FormControl>
-                    <RadioGroupItem value="return" id="return" />
+                    <RadioGroupItem value="return" id="return" aria-label="Return Flight" />
                   </FormControl>
                   <FormLabel htmlFor="return" className="cursor-pointer">
                     Return Trip
@@ -90,7 +90,7 @@ export default function BookingForm(): JSX.Element {
                 </FormItem>
                 <FormItem className="flex grow-0 items-center space-x-3">
                   <FormControl>
-                    <RadioGroupItem value="one way" id="one way" />
+                    <RadioGroupItem value="one way" id="one way" aria-label="One Way Flight" />
                   </FormControl>
                   <FormLabel htmlFor="one way" className="cursor-pointer">
                     One Way

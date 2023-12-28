@@ -25,7 +25,7 @@ export default function Dropdown({
   return (
     <Select onValueChange={onValueChange} defaultValue={defaultValue}>
       <FormControl>
-        <SelectTrigger>
+        <SelectTrigger aria-label="Select Airport">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
       </FormControl>

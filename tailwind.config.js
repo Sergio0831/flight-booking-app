@@ -29,7 +29,7 @@ module.exports = {
         xs: { max: '460px' },
       },
       backgroundImage: {
-        'sidebar-pattern': 'url(./src/assets/plane.svg)',
+        'sidebar-pattern': 'url(/plane.svg)',
       },
       colors: {
         warning: 'hsl(var(--warning))',
